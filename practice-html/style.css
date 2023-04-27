@@ -1,4 +1,19 @@
 h1{
     color:royalblue
-    
+}    
+h1{
+    border-block-style: groove ;
+    background-color: aliceblue;
+}
+h2{
+    color:steelblue;
+    border-bottom: solid royalblue;
+}
+div#zentai {
+    display:grid;
+    grid-template-columns: 1fr;   
+    grid-gap: 10px
+}
+div.box{
+    background-color: lavender;
 }
