@@ -1,0 +1,19 @@
+h1{
+   color:mediumseagreen;
+
+}
+label{
+    font-size: larger;
+    color:mediumaquamarine;  
+}
+table {
+    table-layout: fixed;
+    width: 80%;
+    border-collapse: collapse;
+    border: 5px solid rgb(80, 132, 149);
+    background: linear-gradient(lightsteelblue,aliceblue );;
+}
+caption{
+    color:darkslategrey;
+    font-size: 2.0rem;
+}
