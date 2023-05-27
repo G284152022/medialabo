@@ -74,3 +74,10 @@ let speed = document.querySelector('td.speed');
 speed.textContent = data.wind.speed;
 let deg = document.querySelector('td.deg');
 deg.textContent = data.wind.deg;
+
+let a = document.querySelector('#btn');
+a.addEventListener('click',hyouzi);
+
+function hyouzi(){
+  
+}
