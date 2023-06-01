@@ -56,28 +56,58 @@ console.log('湿度 '+data.main.humidity);
 console.log('風速 '+data.wind.speed);
 console.log('風向 '+data.wind.deg);
 
-let pekin =document.querySelector('caption.toshi');
-pekin.textContent = data.name;
-let lat =document.querySelector('td.lat');
-lat.textContent = data.coord.lat;
-let lon = document.querySelector('td.lon');
-lon.textContent = data.coord.lon;
-let weather = document.querySelector('td.weather');
-weather.textContent = data.weather[0].main;
-let temp_min = document.querySelector('td.temp_min');
-temp_min.textContent = data.main.temp_min;
-let temp_max = document.querySelector('td.temp_max');
-temp_max.textContent = data.main.temp_max;
-let humidity = document.querySelector('td.humidity');
-humidity.textContent = data.main.humidity;
-let speed = document.querySelector('td.speed');
-speed.textContent = data.wind.speed;
-let deg = document.querySelector('td.deg');
-deg.textContent = data.wind.deg;
 
 let a = document.querySelector('#btn');
-a.addEventListener('click',hyouzi);
+a.addEventListener('click',sendRequest);
 
-function hyouzi(){
-  
+function sendRequest(){
+  let s = document.querySelector('select#kuni');
+  let idx = s.selectedIndex;  // idx 番目の option が選択された
+
+  let os = s.querySelectorAll('option');  // s の子要素 option をすべて検索
+  let o = os.item(idx);       // os の idx 番目の要素
+  let id = o.getAttribute('id');
+  let url='https://www.nishita-lab.org/web-contents/jsons/openweather/'+id+'.json';
+
+  axios.get(url)
+        .then(showResult)   // 通信成功
+        .catch(showError)   // 通信失敗
+        .then(finish);      // 通信の最後の処理
+}
+
+function showResult(resp) {
+  let data = resp.data;
+
+  if (typeof data === 'string') {
+      data = JSON.parse(data);
+  }
+  console.log(data);
+  console.log(data.x);
+
+  let toshi =document.querySelector('caption.toshi');
+  toshi.textContent = data.name;
+  let lat =document.querySelector('td.lat');
+  lat.textContent = data.coord.lat;
+  let lon = document.querySelector('td.lon');
+  lon.textContent = data.coord.lon;
+  let weather = document.querySelector('td.weather');
+  weather.textContent = data.weather[0].description;
+  let temp_min = document.querySelector('td.temp_min');
+  temp_min.textContent = data.main.temp_min;
+  let temp_max = document.querySelector('td.temp_max');
+  temp_max.textContent = data.main.temp_max;
+  let humidity = document.querySelector('td.humidity');
+  humidity.textContent = data.main.humidity;
+  let speed = document.querySelector('td.speed');
+  speed.textContent = data.wind.speed;
+  let deg = document.querySelector('td.deg');
+  deg.textContent = data.wind.deg;
+}
+
+function showError(err) {
+  console.log(err);
+}
+
+function finish() {
+  console.log('Ajax 通信が終わりました');
 }
